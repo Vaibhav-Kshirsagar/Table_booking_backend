@@ -1,7 +1,7 @@
 import express from 'express';
 import { getAllUsers,getUser,createUser, deleteUser,updateUser} from './database.js';
 import cors from 'cors';
-
+const PORT = process.env.PORT || 8080
 const app = express();
 app.use(cors());
 
@@ -13,6 +13,7 @@ app.use((err, req, res, next) => {
 
 //   body parser middleware if it is not written then server not identify body....
 app.use(express.json());
+
 app.get("/user_info", async (req, res) => {
   try {
     const users = await getAllUsers();
@@ -96,6 +97,6 @@ app.put("/user_info/update/:id", async (req, res) => {
 
 
 
-app.listen(8080,()=>{
+app.listen(PORT,()=>{
   console.log("server is runing on port 8080")
 })
