@@ -1,7 +1,8 @@
 import express from 'express';
 import { getAllUsers,getUser,createUser, deleteUser,updateUser} from './database.js';
 import cors from 'cors';
-const PORT = process.env.PORT || 8080
+// const PORT = process.env.PORT || 8080
+const PORT = 8080
 const app = express();
 app.use(cors());
 
@@ -69,31 +70,23 @@ app.delete("/user_info/:id", async (req, res) => {
 
 app.put("/user_info/update/:id", async (req, res) => {
   try {
-    const userId = req.params.id; // ID from the URL parameter
-    // const authenticatedUserId = req.user.id; // ID of the authenticated user (from authentication process)
-
-    // if (userId !== authenticatedUserId) {
-    //   // User is not authorized to update this data
-    //   return res.status(403).json({ error: "Unauthorized access" });
-    // }
-
+    const userId = req.params.id; 
     const { name, email, phone, reservation_date, reservation_time, number_of_guests } = req.body;
 
     // Use the updateUser function from your database.js file
-    const updatedUser = await updateUser(userId, name, email, phone, reservation_date, reservation_time, number_of_guests);
-
-    res.json("User information updated successfully" + updateUser);
-    console.log(updateUser)
-    if (updatedUser) {
+    const updateResult = await updateUser(userId, name, email, phone, reservation_date, reservation_time, number_of_guests);
+    
+    if (updateResult) {
       res.json("User information updated successfully");
     } else {
-      res.status(404).json({ error: "User not found" });
+      res.json("Failed to update user information");
     }
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error: " + error });
   }
 });
+
 
 
 

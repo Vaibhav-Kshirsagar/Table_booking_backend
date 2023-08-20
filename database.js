@@ -1,5 +1,5 @@
 import mysql from "mysql2";
-
+// import { format } from 'date-fns';
 import dotenv from 'dotenv'
 // import { name } from "tar/lib/types";
 dotenv.config()
@@ -50,15 +50,16 @@ export async function deleteUser(id) {
 // Update a row from tb table
 export async function updateUser(id, name, email, phone, reservation_date, reservation_time, number_of_guests) {
   try {
-    await pool.query(`
-      UPDATE user_info
-      SET name=?, email=?, phone=?, reservation_date=?, reservation_time=?, number_of_guests=?
-      WHERE id = ?;
-    `, [name, email, phone, reservation_date, reservation_time, number_of_guests, id]);
-
-    return true; // Return true to indicate successful update
+    await pool.query(
+      `UPDATE user_info
+       SET name=?, email=?, phone=?, reservation_date=?, reservation_time=?, number_of_guests=?
+       WHERE id = ?;`,
+      [name, email, phone, reservation_date, reservation_time, number_of_guests, id]
+    );
+    return true;
   } catch (error) {
-    console.error(error);
+    console.error(error); 
     return false; // Return false to indicate failure
   }
 }
+
