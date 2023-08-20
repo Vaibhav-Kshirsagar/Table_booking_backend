@@ -15,6 +15,16 @@ app.use((err, req, res, next) => {
 //   body parser middleware if it is not written then server not identify body....
 app.use(express.json());
 
+
+app.get("/", async (req, res) => {
+  try {
+    res.json("Table Booking App"); // Sending JSON response
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error 123" });
+  }
+});
+
 app.get("/user_info", async (req, res) => {
   try {
     const users = await getAllUsers();
@@ -91,5 +101,5 @@ app.put("/user_info/update/:id", async (req, res) => {
 
 
 app.listen(PORT,()=>{
-  console.log("server is runing on port 8080")
+  console.log(`server is runing on port ${PORT}`)
 })
