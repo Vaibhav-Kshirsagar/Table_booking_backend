@@ -1,8 +1,8 @@
 import express from 'express';
 import { getAllUsers,getUser,createUser, deleteUser,updateUser} from './database.js';
 import cors from 'cors';
-// const PORT = process.env.PORT || 8080
-const PORT = 8080
+const PORT = process.env.PORT || 8080
+// const PORT = 8080
 const app = express();
 app.use(cors());
 
