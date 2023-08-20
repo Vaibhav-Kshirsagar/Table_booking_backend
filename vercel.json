@@ -1,0 +1,21 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "./App.js",
+        "use": "@vercel/static-build",
+        "config": {}
+      }
+    ],
+    "routes": [
+      {
+        "src": "/api/(.*)",
+        "dest": "https://table-booking-backend.vercel.app/"
+      },
+      {
+        "src": "/(.*)",
+        "dest": "https://table-booking-three.vercel.app/"
+      }
+    ]
+  }
+  
